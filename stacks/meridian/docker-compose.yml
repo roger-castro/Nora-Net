@@ -1,0 +1,19 @@
+services:
+  nginx-proxy-manager:
+    image: jc21/nginx-proxy-manager:latest
+    container_name: nginx-proxy-manager
+    hostname: meridian
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "81:81"
+    volumes:
+      - /srv/data/nginx-proxy-manager:/data
+      - /srv/data/nginx-proxy-manager/letsencrypt:/etc/letsencrypt
+    networks:
+      - npm-proxy
+ 
+networks:
+  npm-proxy:
+    external: true

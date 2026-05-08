@@ -1,0 +1,17 @@
+services:
+  ntfy:
+    image: binwiederhier/ntfy
+    container_name: ntfy
+    command: serve
+    volumes:
+      - /srv/data/ntfy:/var/lib/ntfy
+      - /srv/data/ntfy/server.yml:/etc/ntfy/server.yml
+    ports:
+      - "8090:80"
+    restart: unless-stopped
+    networks:
+      - npm-proxy
+
+networks:
+  npm-proxy:
+    external: true

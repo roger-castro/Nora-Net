@@ -51,7 +51,7 @@ DNS queries flow: clients → Pi-hole (ad filtering) → Unbound (recursive reso
 
 | Container | Stack | Role |
 |-----------|-------|------|
-| `portainer` | portainer | Docker management UI |
+| `portainer` | cyan | Docker management UI |
 | `wetty` | shell-walker | Browser-based SSH terminal |
 | `uptime-kuma` | watcher | Uptime & service monitoring |
 | `thunderjaw` | thunderjaw | Pi-hole — DNS-level ad blocking |
@@ -75,6 +75,26 @@ DNS queries flow: clients → Pi-hole (ad filtering) → Unbound (recursive reso
 | Satisfactory | Active |
 | Enshrouded | Inactive |
 | Valheim | Inactive |
+
+---
+
+## Docker Compose Stacks
+
+Sanitized reference compose files for each stack are available in the [`stacks/`](./stacks/) folder, organized by stack name. Sensitive values such as passwords, IP addresses, and API keys have been replaced with descriptive placeholders.
+
+> **Note:** Compose files for `frostclaw` and `mossynook` are not included as these are private custom applications.
+
+| Stack | Folder |
+|-------|--------|
+| apollo (MariaDB + BookStack) | `stacks/apollo/` |
+| demeter (Unbound) | `stacks/demeter/` |
+| glinthawk (ntfy) | `stacks/glinthawk/` |
+| meridian (Nginx Proxy Manager) | `stacks/meridian/` |
+| cyan (Portainer) | `stacks/portainer/` |
+| shell-walker (WeTTY) | `stacks/shell-walker/` |
+| static (BookStack Static) | `stacks/static/` |
+| thunderjaw (Pi-hole) | `stacks/thunderjaw/` |
+| watcher (Uptime Kuma) | `stacks/watcher/` |
 
 ---
 

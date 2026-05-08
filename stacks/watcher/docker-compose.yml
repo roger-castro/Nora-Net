@@ -1,0 +1,19 @@
+services:
+  uptime-kuma:
+    image: louislam/uptime-kuma:latest
+    container_name: uptime-kuma
+    hostname: watcher
+    restart: unless-stopped
+    ports:
+      - "3001:3001"
+    volumes:
+      - /srv/data/uptime-kuma:/app/data
+    networks:
+      - npm-proxy
+      - default
+
+networks:
+  npm-proxy:
+    external: true
+  default:
+    driver: bridge

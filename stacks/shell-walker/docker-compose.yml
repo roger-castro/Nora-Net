@@ -1,0 +1,19 @@
+services:
+  wetty:
+    image: wettyoss/wetty:latest
+    container_name: wetty
+    restart: unless-stopped
+    ports:
+      - "3005:3000"
+    command:
+      - "--ssh-host=your_ssh_host_ip_here"
+      - "--ssh-port=22"
+      - "--ssh-user=your_ssh_user_here"
+      - "--base=/"
+      - "--port=3000"
+    networks:
+      - npm-proxy
+
+networks:
+  npm-proxy:
+    external: true

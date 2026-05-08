@@ -1,0 +1,23 @@
+services:
+  unbound:
+    image: mvance/unbound:latest
+    container_name: unbound
+    hostname: demeter
+    restart: unless-stopped
+    networks:
+      lan_macvlan:
+        ipv4_address: your_static_ip_here
+    volumes:
+      - /srv/data/unbound/config/unbound.conf:/opt/unbound/etc/unbound/unbound.conf:ro
+      - /srv/data/unbound/root/root.hints:/opt/unbound/etc/unbound/root.hints:ro
+      - /srv/data/unbound/var:/opt/unbound/etc/unbound/var:rw
+    healthcheck:
+      test: ["CMD", "drill", "@127.0.0.1", "-p", "5335", "cloudflare.com"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+ 
+networks:
+  lan_macvlan:
+    external: true

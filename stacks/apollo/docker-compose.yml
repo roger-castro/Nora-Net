@@ -1,0 +1,44 @@
+services:
+  mariadb:
+    image: mariadb:lts
+    container_name: mariadb
+    hostname: mariadb
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: "your_root_password_here"
+      MYSQL_USER: your_db_username_here
+      MYSQL_PASSWORD: "your_password_here"
+    volumes:
+      - /srv/data/mariadb:/var/lib/mysql
+    networks:
+      - npm-proxy
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  bookstack:
+    image: lscr.io/linuxserver/bookstack
+    container_name: bookstack
+    hostname: your_hostname_here
+    restart: unless-stopped
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    environment:
+      APP_URL: "http://your_app_url_here"
+      APP_KEY: "your_app_key_here"
+      DB_HOST: mariadb
+      DB_DATABASE: bookstack
+      DB_USERNAME: bookstack
+      DB_PASSWORD: "your_password_here"
+    volumes:
+      - /srv/data/bookstack/config:/config
+    networks:
+      - npm-proxy
+
+networks:
+  npm-proxy:
+    external: true

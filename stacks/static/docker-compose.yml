@@ -1,0 +1,16 @@
+services:
+  bookstack-static:
+    image: nginx:alpine
+    container_name: bookstack-static
+    hostname: static
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - /srv/data/static:/usr/share/nginx/html:ro
+    networks:
+      - npm-proxy
+
+networks:
+  npm-proxy:
+    external: true

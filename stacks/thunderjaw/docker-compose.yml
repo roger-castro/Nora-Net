@@ -1,0 +1,23 @@
+services:
+  pihole:
+    image: pihole/pihole:latest
+    container_name: pihole-primary
+    hostname: thunderjaw
+    restart: unless-stopped
+    networks:
+      lan_macvlan:
+        ipv4_address: your_static_ip_here
+    environment:
+      TZ: "your_timezone_here"
+      FTLCONF_LOCAL_IPV4: "your_static_ip_here"
+      PIHOLE_DNS_: "your_unbound_ip_here#5335"
+      DNSMASQ_LISTENING: "all"
+    volumes:
+      - /srv/data/pihole/etc-pihole:/etc/pihole
+      - /srv/data/pihole/etc-dnsmasq.d:/etc/dnsmasq.d
+    cap_add:
+      - NET_ADMIN
+ 
+networks:
+  lan_macvlan:
+    external: true
