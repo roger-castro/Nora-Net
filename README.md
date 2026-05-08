@@ -40,7 +40,7 @@ All devices and services follow a **Horizon Zero Dawn** naming convention.
 | Hostname | Role |
 |----------|------|
 | `thunderjaw` | Primary Pi-hole — network-wide ad blocking |
-| `stormbird` | Backup Pi-hole |
+| `stormbird` | Backup Pi-hole (Raspberry Pi — pending deployment) |
 | `demeter` | Unbound — recursive DNS resolver |
 
 DNS queries flow: clients → Pi-hole (ad filtering) → Unbound (recursive resolution direct to root servers, no upstream forwarder).
@@ -49,22 +49,32 @@ DNS queries flow: clients → Pi-hole (ad filtering) → Unbound (recursive reso
 
 ## Active Services (Docker — hosted on `minerva`)
 
-| Container | Role |
-|-----------|------|
-| `thunderjaw` | Pi-hole — DNS-level ad blocking |
-| `demeter` | Unbound — recursive DNS resolver |
-| `mariadb` | MariaDB database server |
-| `bookstack` | BookStack — self-hosted wiki & documentation |
-| `bookstack-static` | Static file server |
-| `portainer` | Docker management UI |
-| `uptime-kuma` | Uptime & service monitoring |
-| `nginx-proxy-manager` | Reverse proxy & SSL termination |
-| `ntfy` | Self-hosted push notification server |
-| `wetty` | Browser-based SSH terminal |
-| `mossynook` | Custom app — craft business inventory & sales tracker |
-| `frostclaw` | Custom app — financial coaching app |
-| `enshrouded` | Dedicated game server |
-| `satisfactory` | Dedicated game server |
+| Container | Stack | Role |
+|-----------|-------|------|
+| `portainer` | portainer | Docker management UI |
+| `wetty` | shell-walker | Browser-based SSH terminal |
+| `uptime-kuma` | watcher | Uptime & service monitoring |
+| `thunderjaw` | thunderjaw | Pi-hole — DNS-level ad blocking |
+| `unbound` | demeter | Recursive DNS resolver |
+| `nginx-proxy-manager` | meridian | Reverse proxy & SSL termination |
+| `ntfy` | glinthawk | Self-hosted push notification server |
+| `mariadb` | apollo | MariaDB database server |
+| `bookstack` | apollo | Self-hosted wiki & documentation |
+| `bookstack-static` | static | Static file server |
+| `frostclaw-frontend` | frostclaw | Custom app — financial coaching app (frontend) |
+| `frostclaw-backend` | frostclaw | Custom app — financial coaching app (backend) |
+| `mossynook-ui` | mossynook | Custom app — craft business inventory & sales tracker (frontend) |
+| `mossynook-backend` | mossynook | Custom app — craft business inventory & sales tracker (backend) |
+
+---
+
+## Game Servers (hosted on `zero-dawn`)
+
+| Game | Status |
+|------|--------|
+| Satisfactory | Active |
+| Enshrouded | Inactive |
+| Valheim | Inactive |
 
 ---
 
